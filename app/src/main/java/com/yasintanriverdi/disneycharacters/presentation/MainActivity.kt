@@ -1,7 +1,8 @@
-package com.yasintanriverdi.disneycharacters
+package com.yasintanriverdi.disneycharacters.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.yasintanriverdi.disneycharacters.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
