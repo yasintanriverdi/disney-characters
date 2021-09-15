@@ -1,3 +1,9 @@
 <resources>
   <string name="app_name">Disney Characters</string>
+
+  <string name="section_title_films">Films</string>
+  <string name="section_title_tv_shows">Tv Shows</string>
+  <string name="section_title_tv_video_games">Video Games</string>
+
+  <string name="character_list_default_error_message">Oops! Something went wrong,\n Please refresh after some time!</string>
 </resources>

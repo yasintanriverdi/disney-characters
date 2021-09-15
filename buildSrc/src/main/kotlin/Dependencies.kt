@@ -26,12 +26,16 @@ object Dependencies {
         object Compose {
             const val ui = "androidx.compose.ui:ui:${Versions.compose}"
             const val material = "androidx.compose.material:material:${Versions.compose}"
+            const val constraintLayout =
+                "androidx.constraintlayout:constraintlayout-compose:${Versions.composeConstraintLayout}"
         }
     }
 
     object Google {
         const val material =
             "com.google.android.material:material:${Versions.material}"
+        const val insets = "com.google.accompanist:accompanist-insets:${Versions.accompanist}"
+        const val flowLayout = "com.google.accompanist:accompanist-flowlayout:${Versions.accompanist}"
     }
 
     object OkHttp {
@@ -55,10 +59,11 @@ object Dependencies {
         const val core = "com.google.dagger:hilt-android:${Versions.hilt}"
         const val compiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
         const val viewModel = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hiltViewModel}"
-        const val composeNavigation = "androidx.hilt:hilt-navigation-compose:${Versions.hiltComposeNavigation}"
+        const val composeNavigation =
+            "androidx.hilt:hilt-navigation-compose:${Versions.hiltComposeNavigation}"
     }
 
-    const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
+    const val coil = "io.coil-kt:coil-compose:${Versions.coil}"
 }
 
 object TestDependencies {
@@ -116,9 +121,11 @@ object Versions {
     const val fragment = "1.3.6"
     const val navigation = "2.3.5"
     const val compose = "1.0.1"
+    const val composeConstraintLayout = "1.0.0-beta02"
 
     // Google
     const val material = "1.4.0"
+    const val accompanist = "0.18.0"
 
     // Networking
     const val okhttp = "4.9.1"
@@ -130,7 +137,7 @@ object Versions {
     const val hiltViewModel = "1.0.0-alpha03"
     const val hiltComposeNavigation = "1.0.0-alpha03"
 
-    const val glide = "4.12.0"
+    const val coil = "1.3.2"
 
     // Test
     const val junit = "4.13.2"

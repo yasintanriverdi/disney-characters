@@ -36,6 +36,14 @@ android {
                 "proguard-rules.pro"
             )
         }
+
+        forEach {
+         it. buildConfigField(
+             type = "String",
+             name = "BASE_URL",
+             value = "\"https://api.disneyapi.dev/\""
+         )
+        }
     }
 
     compileOptions {
@@ -71,13 +79,17 @@ dependencies {
     // Compose
     implementation(Dependencies.AndroidX.Compose.ui)
     implementation(Dependencies.AndroidX.Compose.material)
+    implementation(Dependencies.AndroidX.Compose.constraintLayout)
 
     // Google
     implementation(Dependencies.Google.material)
+    implementation(Dependencies.Google.insets)
+    implementation(Dependencies.Google.flowLayout)
 
     // Hilt
     implementation(Dependencies.Hilt.core)
     implementation(Dependencies.Hilt.viewModel)
+    implementation(Dependencies.Hilt.composeNavigation)
     kapt(Dependencies.Hilt.compiler)
 
     // OkHttp
@@ -93,7 +105,7 @@ dependencies {
     implementation(Dependencies.Moshi.adapters)
     implementation(Dependencies.Moshi.kotlin)
 
-    implementation(Dependencies.glide)
+    implementation(Dependencies.coil)
 
     // Test
     testImplementation(TestDependencies.junit)

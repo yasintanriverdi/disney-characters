@@ -1,0 +1,19 @@
+{
+  "_id": 20,
+  "films": [],
+  "shortFilms": [],
+  "tvShows": [
+    "Elena of Avalor"
+  ],
+  "videoGames": [],
+  "parkAttractions": [],
+  "allies": [],
+  "enemies": [],
+  "sourceUrl": "https://disney.fandom.com/wiki/Queen_Abigail",
+  "name": "Queen Abigail",
+  "imageUrl": "https://static.wikia.nocookie.net/disney/images/f/fa/Normal_EoA_S3_E4_0217.jpg/revision/latest?cb=20191113041109",
+  "createdAt": "2021-04-12T01:26:04.489Z",
+  "updatedAt": "2021-04-12T01:26:04.489Z",
+  "url": "https://api.disneyapi.dev/characters/20",
+  "__v": 0
+}
