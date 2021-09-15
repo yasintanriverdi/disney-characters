@@ -15,7 +15,7 @@ android {
         targetSdk = Versions.targetSdk
         versionCode = 1
         versionName = "1.0"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.yasintanriverdi.disneycharacters.core.AppTestRunner"
     }
 
     buildFeatures {
@@ -26,6 +26,10 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.compose
+    }
+
+    packagingOptions {
+        resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
     }
 
     buildTypes {
@@ -124,4 +128,10 @@ dependencies {
     androidTestImplementation(TestDependencies.AndroidX.Espresso.contributor)
     androidTestImplementation(TestDependencies.AndroidX.testRunner)
     androidTestImplementation(TestDependencies.AndroidX.testRules)
+    androidTestImplementation(TestDependencies.AndroidX.navigation)
+    androidTestImplementation(TestDependencies.AndroidX.Compose.junit)
+    androidTestImplementation(TestDependencies.Google.hilt)
+    kaptAndroidTest(Dependencies.Hilt.compiler)
+
+    debugImplementation(TestDependencies.AndroidX.Compose.manifest)
 }

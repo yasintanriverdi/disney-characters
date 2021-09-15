@@ -12,9 +12,13 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.yasintanriverdi.disneycharacters.R
 import com.yasintanriverdi.disneycharacters.common.UIState
 import com.yasintanriverdi.disneycharacters.presentation.character_list.components.CharacterItem
 import com.yasintanriverdi.disneycharacters.presentation.navigation.Screen

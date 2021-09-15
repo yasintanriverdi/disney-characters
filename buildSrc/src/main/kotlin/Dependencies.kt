@@ -90,10 +90,18 @@ object TestDependencies {
         const val testRules = "androidx.test:rules:${Versions.testRunner}"
 
         const val junit = "androidx.test.ext:junit:${Versions.xJunit}"
+
+        object Compose {
+            const val junit = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
+            const val manifest = "androidx.compose.ui:ui-test-manifest:${Versions.compose}"
+        }
+
+        const val navigation = "androidx.navigation:navigation-testing:${Versions.navigation}"
     }
 
     object Google {
         const val truth = "com.google.truth:truth:${Versions.truth}"
+        const val hilt = "com.google.dagger:hilt-android-testing:${Versions.hilt}"
     }
 
     object Mockito {
