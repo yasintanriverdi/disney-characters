@@ -8,8 +8,7 @@ import com.yasintanriverdi.disneycharacters.common.Resource
 import com.yasintanriverdi.disneycharacters.common.UIState
 import com.yasintanriverdi.disneycharacters.domain.use_case.GetCharactersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,22 +24,23 @@ class CharactersViewModel @Inject constructor(
     }
 
     internal fun getCharacters() {
-        getCharactersUseCase().onEach { resource ->
-            when (resource) {
+        _state.value = CharacterListState(
+            uiState = UIState.LOADING
+        )
+
+        viewModelScope.launch {
+            val resource = getCharactersUseCase()
+            _state.value = when (resource) {
                 is Resource.Success ->
-                    _state.value = CharacterListState(
+                    CharacterListState(
                         uiState = UIState.CONTENT,
                         characters = resource.data
                     )
                 is Resource.Error ->
-                    _state.value = CharacterListState(
+                    CharacterListState(
                         uiState = UIState.ERROR
                     )
-                is Resource.Loading ->
-                    _state.value = CharacterListState(
-                        uiState = UIState.LOADING
-                    )
             }
-        }.launchIn(viewModelScope)
+        }
     }
 }

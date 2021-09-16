@@ -8,7 +8,6 @@ import com.yasintanriverdi.disneycharacters.core.MockCharacterProvider
 import com.yasintanriverdi.disneycharacters.domain.model.Character
 import com.yasintanriverdi.disneycharacters.domain.use_case.GetCharactersUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Rule
 import org.junit.Test
@@ -30,46 +29,32 @@ class CharactersViewModelTest {
         val mockResponse = MockCharacterProvider.getMockCharacters()
 
         whenever(getCharactersUseCase())
-            .thenReturn(flow {
-                emit(Resource.Success(data = mockResponse))
-            })
+            .thenReturn(Resource.Success(data = mockResponse))
 
         viewModel = CharactersViewModel(getCharactersUseCase)
 
-        assertThat(viewModel.state.value).isEqualTo(CharacterListState(
-            uiState = UIState.CONTENT,
-            characters = mockResponse
-        ))
+        assertThat(viewModel.state.value).isEqualTo(
+            CharacterListState(
+                uiState = UIState.CONTENT,
+                characters = mockResponse
+            )
+        )
     }
 
     @Test
     fun `fetch data with exception and update state`() = mainCoroutineRule.runBlockingTest {
         whenever(getCharactersUseCase())
-            .thenReturn(flow {
-                emit(Resource.Error<List<Character>>(message = "Error occurred"))
-            })
+            .thenReturn(Resource.Error<List<Character>>(message = "Error occurred"))
 
         viewModel = CharactersViewModel(getCharactersUseCase)
 
-        assertThat(viewModel.state.value).isEqualTo(CharacterListState(
-            uiState = UIState.ERROR,
-            characters = null
-        ))
+        assertThat(viewModel.state.value).isEqualTo(
+            CharacterListState(
+                uiState = UIState.ERROR,
+                characters = null
+            )
+        )
     }
 
-    @Test
-    fun `fetch loading result and update state`() = mainCoroutineRule.runBlockingTest {
-        whenever(getCharactersUseCase())
-            .thenReturn(flow {
-                emit(Resource.Loading<List<Character>>())
-            })
-
-        viewModel = CharactersViewModel(getCharactersUseCase)
-
-        assertThat(viewModel.state.value).isEqualTo(CharacterListState(
-            uiState = UIState.LOADING,
-            characters = null
-        ))
-    }
 
 }

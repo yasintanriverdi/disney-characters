@@ -10,7 +10,6 @@ import com.yasintanriverdi.disneycharacters.domain.model.Character
 import com.yasintanriverdi.disneycharacters.domain.use_case.GetCharacterUseCase
 import com.yasintanriverdi.disneycharacters.presentation.navigation.Args
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Rule
 import org.junit.Test
@@ -48,9 +47,7 @@ class CharacterDetailViewModelTest {
         val mockResponse = MockCharacterProvider.getMockCharacter(characterId)
 
         whenever(getCharacterUseCase(characterId))
-            .thenReturn(flow {
-                emit(Resource.Success(data = mockResponse))
-            })
+            .thenReturn((Resource.Success(data = mockResponse)))
 
         viewModel = CharacterDetailViewModel(getCharacterUseCase, savedStateHandle)
 
@@ -70,9 +67,7 @@ class CharacterDetailViewModelTest {
         }
 
         whenever(getCharacterUseCase(characterId))
-            .thenReturn(flow {
-                emit(Resource.Error<Character>(message = "Error"))
-            })
+            .thenReturn(Resource.Error<Character>(message = "Error"))
 
         viewModel = CharacterDetailViewModel(getCharacterUseCase, savedStateHandle)
 
@@ -84,26 +79,4 @@ class CharacterDetailViewModelTest {
         )
     }
 
-    @Test
-    fun `fetch loading result and update state`() = mainCoroutineRule.runBlockingTest {
-        val characterId = "58"
-        val savedStateHandle = SavedStateHandle().apply {
-            set(Args.ARG_CHARACTER_ID, characterId)
-        }
-
-        whenever(getCharacterUseCase(characterId))
-            .thenReturn(flow {
-                emit(Resource.Loading<Character>())
-            })
-
-        viewModel = CharacterDetailViewModel(getCharacterUseCase, savedStateHandle)
-
-        assertThat(viewModel.state.value).isEqualTo(
-            CharacterDetailState(
-                uiState = UIState.LOADING,
-                character = null
-            )
-        )
-
-    }
 }

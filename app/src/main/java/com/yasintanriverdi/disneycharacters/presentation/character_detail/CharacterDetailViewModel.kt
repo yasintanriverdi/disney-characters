@@ -10,8 +10,7 @@ import com.yasintanriverdi.disneycharacters.common.UIState
 import com.yasintanriverdi.disneycharacters.domain.use_case.GetCharacterUseCase
 import com.yasintanriverdi.disneycharacters.presentation.navigation.Args
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -36,22 +35,23 @@ class CharacterDetailViewModel @Inject constructor(
             return
         }
 
-        getCharacterUseCase(characterId).onEach { resource ->
-            when (resource) {
+        viewModelScope.launch {
+            _state.value = CharacterDetailState(
+                uiState = UIState.LOADING
+            )
+
+            val resource = getCharacterUseCase(characterId)
+            _state.value = when (resource) {
                 is Resource.Success ->
-                    _state.value = CharacterDetailState(
+                    CharacterDetailState(
                         uiState = UIState.CONTENT,
                         character = resource.data
                     )
                 is Resource.Error ->
-                    _state.value = CharacterDetailState(
+                    CharacterDetailState(
                         uiState = UIState.ERROR
                     )
-                is Resource.Loading ->
-                    _state.value = CharacterDetailState(
-                        uiState = UIState.LOADING
-                    )
             }
-        }.launchIn(viewModelScope)
+        }
     }
 }
