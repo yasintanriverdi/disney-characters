@@ -4,14 +4,15 @@ import androidx.lifecycle.SavedStateHandle
 import com.google.common.truth.Truth.assertThat
 import com.yasintanriverdi.disneycharacters.common.Resource
 import com.yasintanriverdi.disneycharacters.common.UIState
-import com.yasintanriverdi.disneycharacters.core.MainCoroutineRule
 import com.yasintanriverdi.disneycharacters.core.MockCharacterProvider
-import com.yasintanriverdi.disneycharacters.domain.model.Character
 import com.yasintanriverdi.disneycharacters.domain.use_case.GetCharacterUseCase
 import com.yasintanriverdi.disneycharacters.presentation.navigation.Args
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Rule
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
@@ -19,12 +20,14 @@ import org.mockito.kotlin.whenever
 @ExperimentalCoroutinesApi
 class CharacterDetailViewModelTest {
 
-    @get:Rule
-    var mainCoroutineRule = MainCoroutineRule()
-
     lateinit var viewModel: CharacterDetailViewModel
 
     val getCharacterUseCase: GetCharacterUseCase = mock()
+
+    @Before
+    fun setup() {
+        Dispatchers.setMain(UnconfinedTestDispatcher())
+    }
 
     @Test
     fun `error state in case character id not exists`() {
@@ -39,7 +42,7 @@ class CharacterDetailViewModelTest {
     }
 
     @Test
-    fun `fetch data successfully and update state`() = mainCoroutineRule.runBlockingTest {
+    fun `fetch data successfully and update state`() = runTest {
         val characterId = "58"
         val savedStateHandle = SavedStateHandle().apply {
             set(Args.ARG_CHARACTER_ID, characterId)
@@ -60,14 +63,14 @@ class CharacterDetailViewModelTest {
     }
 
     @Test
-    fun `fetch data with exception and update state`() = mainCoroutineRule.runBlockingTest {
+    fun `fetch data with exception and update state`() = runTest {
         val characterId = "58"
         val savedStateHandle = SavedStateHandle().apply {
             set(Args.ARG_CHARACTER_ID, characterId)
         }
 
         whenever(getCharacterUseCase(characterId))
-            .thenReturn(Resource.Error<Character>(message = "Error"))
+            .thenReturn(Resource.Error(message = "Error"))
 
         viewModel = CharacterDetailViewModel(getCharacterUseCase, savedStateHandle)
 

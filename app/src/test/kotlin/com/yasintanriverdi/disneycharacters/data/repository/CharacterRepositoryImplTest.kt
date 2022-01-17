@@ -6,8 +6,8 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.yasintanriverdi.disneycharacters.common.Resource
 import com.yasintanriverdi.disneycharacters.data.remote.CharactersApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -26,7 +26,7 @@ class CharacterRepositoryImplTest {
     lateinit var charactersApi: CharactersApi
     lateinit var mockServer: MockWebServer
 
-    val dispatcher = TestCoroutineDispatcher()
+    val dispatcher = UnconfinedTestDispatcher()
 
     @Before
     fun setup() {
@@ -41,7 +41,7 @@ class CharacterRepositoryImplTest {
     }
 
     @Test
-    fun `fetch characters successfully by given mock data`() = runBlocking {
+    fun `fetch characters successfully by given mock data`() = runTest {
         mockHttpResponse("api_response/mock_characters.json", HttpURLConnection.HTTP_OK)
 
         val result = repository.getCharacters()
@@ -50,7 +50,7 @@ class CharacterRepositoryImplTest {
     }
 
     @Test
-    fun `fetch characters with exception`() = runBlocking {
+    fun `fetch characters with exception`() = runTest {
         mockHttpResponse("api_response/mock_characters.json", HttpURLConnection.HTTP_FORBIDDEN)
 
         val result = repository.getCharacters()
@@ -59,7 +59,7 @@ class CharacterRepositoryImplTest {
     }
 
     @Test
-    fun `fetch character successfully by given mock data`() = runBlocking {
+    fun `fetch character successfully by given mock data`() = runTest {
         val characterId = "58"
         mockHttpResponse("api_response/mock_character.json", HttpURLConnection.HTTP_OK)
 
@@ -69,7 +69,7 @@ class CharacterRepositoryImplTest {
     }
 
     @Test
-    fun `fetch character with exception`() = runBlocking {
+    fun `fetch character with exception`() = runTest {
         val characterId = "58"
         mockHttpResponse("api_response/mock_character.json", HttpURLConnection.HTTP_FORBIDDEN)
 

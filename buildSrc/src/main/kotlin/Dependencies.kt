@@ -114,45 +114,45 @@ object TestDependencies {
 
 
 object Versions {
-    const val compileSdk = 30
+    const val compileSdk = 31
     const val minSdk = 21
-    const val targetSdk = 30
+    const val targetSdk = 31
 
     // Kotlin
-    const val kotlin = "1.5.21"
-    const val coroutines = "1.5.1"
+    const val kotlin = "1.6.0"
+    const val coroutines = "1.6.0"
 
     // AndroidX
     const val coreKtx = "1.6.0"
-    const val lifecycle = "2.3.1"
-    const val constraintLayout = "2.1.0"
-    const val fragment = "1.3.6"
-    const val navigation = "2.3.5"
-    const val compose = "1.0.1"
-    const val composeConstraintLayout = "1.0.0-beta02"
+    const val lifecycle = "2.4.0"
+    const val constraintLayout = "2.1.2"
+    const val fragment = "1.4.0"
+    const val navigation = "2.4.0-rc01"
+    const val compose = "1.1.0-rc01"
+    const val composeConstraintLayout = "1.0.0-rc02"
 
     // Google
-    const val material = "1.4.0"
-    const val accompanist = "0.18.0"
+    const val material = "1.5.0"
+    const val accompanist = "0.22.0-rc"
 
     // Networking
-    const val okhttp = "4.9.1"
+    const val okhttp = "4.9.3"
     const val retrofit = "2.9.0"
     const val moshi = "1.12.0"
 
     // Hilt
-    const val hilt = "2.38.1"
+    const val hilt = "2.40.5"
     const val hiltViewModel = "1.0.0-alpha03"
-    const val hiltComposeNavigation = "1.0.0-alpha03"
+    const val hiltComposeNavigation = "1.0.0-rc01"
 
-    const val coil = "1.3.2"
+    const val coil = "1.4.0"
 
     // Test
     const val junit = "4.13.2"
     const val testingCore = "1.4.0"
-    const val coroutinesTest = "1.4.2"
-    const val mockito = "3.11.2"
-    const val mockitoKotlin = "3.2.0"
+    const val coroutinesTest = "1.6.0"
+    const val mockito = "4.2.0"
+    const val mockitoKotlin = "4.0.0"
     const val testingArchCore = "2.1.0"
     const val truth = "1.1.3"
     const val espressoCore = "3.4.0"
